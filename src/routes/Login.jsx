@@ -1,11 +1,11 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { LoginPage } from "../styled/Login.styled"
 import {FaEyeSlash, FaEye} from "react-icons/fa"
 // import axios from "axios"
 import { useNavigate } from "react-router"
 import { useDispatch } from "react-redux"
 import { login } from "../store/user"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 
 import axios from "../config/axios"
 
@@ -18,6 +18,7 @@ const Login = () => {
     const PasswordRef = useRef()
 
     const navigate = useNavigate()
+    const [ searchParams, setSearchParams] = useSearchParams()
 
     const [passwordVisibility, setPasswordVisibility] = useState()
     const [error, setError] = useState("")
@@ -55,7 +56,6 @@ const Login = () => {
         }
         
     }
-
     
   return (
     <LoginPage>
@@ -73,7 +73,7 @@ const Login = () => {
                     </div>
 
                     <div className="form-field">
-                        <label >Password </label>
+                        <label>Password </label>
                         <span>
                             <input ref={PasswordRef} type="password" className="field"/>
                             <div className="visible" id="password" onClick={() => updatePasswordVisibility()}>

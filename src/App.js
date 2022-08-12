@@ -25,6 +25,8 @@ import CreateTicket from "./routes/Dashboard/support/CreateTicket";
 import Tickets from "./routes/Dashboard/support/Tickets";
 import Ticket from "./routes/Dashboard/support/Ticket";
 
+import AdminLogin from "./routes/Dashboard/Admin/Login"
+
 
 function App() {
 
@@ -47,6 +49,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/create-account" element={<CreateAccount />} />
 
+              {/* start Dashboard routes */}
               <Route path="/dashboard" element={<Dashboard/>}>
 
                 <Route path="" element={<Navigate to="products" />}/>
@@ -64,8 +67,15 @@ function App() {
                   <Route path="ticket" element={<Ticket />}/>
                   <Route path="createticket" element={<CreateTicket/>}/>
                 </Route>
-
               </Route>
+              {/* end Dashboard routes */}
+
+              {/* start Admin Routes */}
+              <Route path="/admin" >
+                <Route path="login" element={<AdminLogin/>}/>
+              </Route>
+
+
               
           </Routes>
     </div>
