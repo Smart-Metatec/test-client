@@ -71,7 +71,7 @@ const Dashboard = () => {
 
           <Nav />
           <DashboardNestedRoutes>
-            <Outlet/>
+            <Outlet />
           </DashboardNestedRoutes>
           
         </Main>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from "react-router"
 import { AdminLoginPage } from '../../../styled/Admin/Login.styled'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
@@ -13,17 +14,21 @@ const LoginSchema = Yup.object().shape({
                  .matches(/[A-Z]+/, "Password must have uppercase letters.")
                  .matches(/[a-z]+/, "Password must contain lowercase letters.")
                  .matches(/[0-9]+/, "Password must contain numbers")
-                 .matches(/[@!#$%^&*(){}[\]:";'<>,\.?/]+/, "Password must contain special characters")
+                 .matches(/[@!#$%^&*(){}[\]:";'<>,.?/]+/, "Password must contain special characters")
 })
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
 
+    const navigate = useNavigate()
+
     const submit = async (values) => {
         const request = await axios.post("api/admin/login", values)
+        console.log("Hello")
         const response = request.data
+        console.log(response)
         if(response.pass){
-            // Go to the admin dashboard
+            navigate("/admin")
         }
     }
 
@@ -36,6 +41,10 @@ const Login = () => {
         // Change field type based on show password state
         passwordField.type = !showPassword ? "text" : "password"
     }
+
+    useEffect(() => {
+        console.log("Hello")
+    }, [showPassword])
   return (
     <AdminLoginPage>
         <h1>Enter Your Credentials</h1>

@@ -26,6 +26,11 @@ import Tickets from "./routes/Dashboard/support/Tickets";
 import Ticket from "./routes/Dashboard/support/Ticket";
 
 import AdminLogin from "./routes/Dashboard/Admin/Login"
+import Admin from "./routes/Dashboard/Admin/Admin"
+import Home from "./routes/Dashboard/Admin/Home"
+import Users from "./routes/Dashboard/Admin/Users"
+import SupportTickets from "./routes/Dashboard/Admin/Tickets"
+import AdminProducts from "./routes/Dashboard/Admin/Products"
 
 
 function App() {
@@ -71,8 +76,12 @@ function App() {
               {/* end Dashboard routes */}
 
               {/* start Admin Routes */}
-              <Route path="/admin" >
+              <Route path="/admin" element={<Admin />} >
+                <Route path="" element={<Home />}/>
                 <Route path="login" element={<AdminLogin/>}/>
+                <Route path="users" element={<Users />}/>
+                <Route path="tickets" element={<SupportTickets />}/>
+                <Route path="products" element={<AdminProducts/>}/>
               </Route>
 
 
