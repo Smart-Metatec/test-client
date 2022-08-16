@@ -90,7 +90,7 @@ const Account = () => {
     console.log(updatedData)
     if(Object.keys(updatedData).length > 0){
       try {
-        const request = await axios.post("users/account/update", updatedData)
+        const request = await axios.post("api/users/account/update", updatedData)
         const response = request.data
         if(response.pass){
           console.log(response)

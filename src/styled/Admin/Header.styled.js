@@ -19,6 +19,7 @@ export const HeaderStyle = styled.header`
             a {
                 text-decoration: none;
                 color: white;
+                font-size: 1.5em;
             }
         }
     }
