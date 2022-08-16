@@ -1,12 +1,11 @@
 import React from 'react'
 import { NavLink } from "react-router-dom"
 import {HeaderStyle} from "../../styled/Admin/Header.styled"
-
 const Header = () => {
   return (
     <HeaderStyle>
         <NavLink to="">
-            <img src="../images/logo.png" alt="" />
+            <img src="../../images/logo.png" alt="" />
         </NavLink>
 
         <nav>

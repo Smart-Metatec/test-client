@@ -3,7 +3,6 @@ import ListHeader from '../../../components/ListHeader'
 import styled from 'styled-components'
 import axios from '../../../config/axios'
 import UserItem from '../../../components/Admin/UserItem'
-import User from '../../../store/user'
 
 const USERHEADINGS = ['Name', 'Email', 'Total Tickets', "Active Tickets", "Products", 'More Info']
 const Users = () => {
@@ -13,7 +12,7 @@ const Users = () => {
         const requestUsers = await axios.post('api/admin/users')
         const response = requestUsers.data
         // console.log(`this is the data: ${}`)
-        setUsers(response)
+        setUsers(Object.values(response))
     }
     // console.log(users)
     const getUsers = useCallback(getUsersCallback, [])
