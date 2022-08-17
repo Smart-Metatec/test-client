@@ -7,15 +7,14 @@ const UserItem = ({user}) => {
 
 
   const navigate = useNavigate()
-
   return (
     <UserItemStyle>
-        <div>Bob</div>
-        <div>bob@gmail.com</div>
+        <div>{user.first_name}</div>
+        <div>{user.email}</div>
         <div>5</div>
         <div>1</div>
-        <div>2</div>
-        <div><MdInfoOutline size={30} onClick={() => navigate("/admin/users/1", {state: {user}})}/></div>
+        <div>{user.products.length}</div>
+        <div><MdInfoOutline size={30} onClick={() => navigate(`/admin/users/${user.id}`, {state: {user}})}/></div>
     </UserItemStyle>
   )
 }

@@ -7,26 +7,35 @@ import UserItem from '../../../components/Admin/UserItem'
 const USERHEADINGS = ['Name', 'Email', 'Total Tickets', "Active Tickets", "Products", 'More Info']
 const Users = () => {
     const [users, setUsers] = useState([])
+    const [filterUsers, setFilterUsers] = useState(users)
 
+    // Callback function for useCallback hook
     const getUsersCallback = async () => {
         const requestUsers = await axios.post('api/admin/users')
         const response = requestUsers.data
-        // console.log(`this is the data: ${}`)
-        setUsers(Object.values(response))
+        const allUsers = Object.values(response)
+        setUsers(allUsers)
+        setFilterUsers(allUsers)
     }
-    // console.log(users)
+
     const getUsers = useCallback(getUsersCallback, [])
-    console.log(users)
+
+    const getUser = (e) => {
+        const searchValue = e.target.value
+        let filteredUsers = users.filter(user => new RegExp(`${searchValue}`).test(user.email))
+        setFilterUsers(filteredUsers)
+    }
+
     useEffect(() => {
         getUsers()
     }, [getUsers])
     return (
         <UserStyle>
             <div id='search'>
-                <input type="text" placeholder='Search Users'/>
+                <input type="text" placeholder='Search Users By Email' onChange={(e) => getUser(e)}/>
             </div>
             <ListHeader headings={USERHEADINGS}/>
-            {users.map((user, index) => (
+            {filterUsers.map((user, index) => (
                 <UserItem key={index} user={user}/>
             ))}
         </UserStyle>

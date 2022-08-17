@@ -59,6 +59,12 @@ const UserInfo = () => {
             <div id="info">
                 <section>
                     <h2>Products</h2>
+                    {user.products.map((product, index) => (
+                        <div className='product' key={index}>
+                            <div>{product.name}</div>
+                            <div>{new Date(product.purchase_date).toDateString()}</div>
+                        </div>
+                    ))}
                 </section>
                 <section>
                     <h2>Personal Details</h2>
@@ -112,6 +118,12 @@ section {
             margin-top: 5px;
         }
     }
+}
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid ${({theme}) => theme.colors.green};
 }
 
 #tickets {

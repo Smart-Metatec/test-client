@@ -33,6 +33,8 @@ import UserInfo from "./routes/Dashboard/Admin/UserInfo";
 import SupportTickets from "./routes/Dashboard/Admin/Tickets"
 import AdminProducts from "./routes/Dashboard/Admin/Products"
 
+import NotFound from "./routes/NotFound"
+
 
 function App() {
 
@@ -63,6 +65,7 @@ function App() {
                   <Route path="" element={<Products />}/>
                   <Route path="workmate" element={<WorkMate/>}/>
                   <Route path="commerce" element={<Commerce/>}/>
+                  <Route path="*" element={<Navigate to=""/>}/>
                 </Route>
 
                 <Route path="account" element={<Account />}/>
@@ -84,9 +87,10 @@ function App() {
                 <Route path="users/:id" element={<UserInfo />}/>
                 <Route path="tickets" element={<SupportTickets />}/>
                 <Route path="products" element={<AdminProducts />}/>
+                <Route path="*" element={<Navigate to=""/>}/>
               </Route>
 
-
+              <Route path="*" element={<NotFound />}/>
               
           </Routes>
     </div>
