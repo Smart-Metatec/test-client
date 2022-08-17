@@ -91,6 +91,8 @@ const ProductInfoStyle = styled.main`
         display: flex;
         justify-content: space-between;
         width: 20vw;
+        margin-top: 10px;
+        border-bottom: 1px solid ${({theme}) => theme.colors.green};
 
         div {
             width: 10vw;
@@ -102,6 +104,8 @@ const ProductInfoStyle = styled.main`
         width: 20vw;
         justify-content: space-between;
         text-align: left;
+        border-bottom: 1px solid ${({theme}) => theme.colors.green};
+        margin-top: 10px;
 
         > span {
             width: 3vw;

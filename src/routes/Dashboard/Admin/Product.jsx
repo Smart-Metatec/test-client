@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import styled from 'styled-components'
 import { Formik, Form, Field } from 'formik'
 import axios from '../../../config/axios'
@@ -7,6 +7,7 @@ import axios from '../../../config/axios'
 const Product = () => {
     const location = useLocation()
     const [product, setProduct] = useState(location.state)
+    const navigate = useNavigate()
 
     const createInitialValues = () => {
         let initialValues = {
@@ -23,13 +24,16 @@ const Product = () => {
         return initialValues
     }
 
-    const submitProduct = values => {
+    const submitProduct = async values => {
         // Data object to send to server
-        let submitData = {}
+        let submitData = {
+            tiers: [],
+            product: {}
+        }
 
         // Check name and description to see if they are the same
-        if(values.name !== product.name) submitData.name = values.name
-        if(values.description !== product.description) submitData.description = values.description
+        if(values.name !== product.name) submitData.product.name = values.name
+        if(values.description !== product.description) submitData.product.description = values.description
 
         // Check the tiers
         const numRegex = /^\d+$/
@@ -41,10 +45,28 @@ const Product = () => {
             if(!key in values) continue
             
             // Update the submit data object if the tier price needs to be updated
-            if(values[key] !== tier.price && numRegex.test(values[key])) submitData[key] = values[key]
+            if(numRegex.test(values[key]) && values[key] != tier.price){
+                let currentTiers = submitData.tiers
+                // submitData.tiers = values[key].toString()
+                submitData.tiers = [...currentTiers, [{price: parseFloat(values[key])}, {id: tier.id}]]
+            }
+
         }
 
         // Send data to server for update
+        if(Object.keys(submitData.tiers).length === 0) delete submitData.tiers
+        if(Object.keys(submitData.product).length === 0) delete submitData.product
+        
+        if(Object.keys(submitData).length > 0){
+            try {
+                console.log("Saving product")
+                const requestUpdate = await axios.put("api/admin/product", {product_id: product.id, data: submitData})
+                navigate("/admin/products")
+
+            } catch (e){
+                console.log(e.response)
+            }
+        }
     }
     return (
         <ProductStyles>
