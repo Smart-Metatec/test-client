@@ -32,7 +32,8 @@ import Users from "./routes/Dashboard/Admin/Users"
 import UserInfo from "./routes/Dashboard/Admin/UserInfo";
 import SupportTickets from "./routes/Dashboard/Admin/Tickets"
 import AdminProducts from "./routes/Dashboard/Admin/Products"
-import ProductInfo from "./routes/Dashboard/Admin/ProductInfo";
+import ProductInfo from "./routes/Dashboard/Admin/ProductInfo"
+import Product from "./routes/Dashboard/Admin/Product";
 
 import NotFound from "./routes/NotFound"
 
@@ -89,6 +90,7 @@ function App() {
                 <Route path="tickets" element={<SupportTickets />}/>
                 <Route path="products" element={<AdminProducts />}/>
                 <Route path="products/:id" element={<ProductInfo />}/>
+                <Route path="products/edit/:id" element={<Product />}/>
                 <Route path="*" element={<Navigate to=""/>}/>
               </Route>
 

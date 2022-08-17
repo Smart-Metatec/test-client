@@ -17,7 +17,7 @@ const ProductItem = ({ product }) => {
             <div>
                 <MdInfoOutline 
                     size={30} 
-                    onClick={() => navigate(`/admin/products/${product.name}`, {state: product})}/>
+                    onClick={() => navigate(`/admin/products/${product.id}`, {state: product})}/>
             </div>
         </ItemStyle>
     )
