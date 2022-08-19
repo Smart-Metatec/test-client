@@ -15,24 +15,6 @@ const WorkMate = () => {
   const [emailList, setEmailList] = useState<Array<Form>>([])
 
   const navigate = useNavigate()
-
-  const addEmail = () => {
-    if(!emailRef.current) return
-    const email = emailRef.current.value
-    const date = new Date(Date.now()).toLocaleDateString()
-
-    if(email){
-      emailList.filter((emailItem: any) => emailItem.email === email)
-      // if(!itemExists){
-        setEmailList((prevList: any) => ([...prevList, {email, date}]))
-        emailRef.current.value = ""
-      // } else {
-      //     setError("Cannot add the same email twice")
-      // }
-
-    }
-    
-  }
   return (
     <WorkMatePage>
         <header>
@@ -43,7 +25,7 @@ const WorkMate = () => {
 
           <div className="add">
             <input type="text" ref={emailRef}/>
-            <button type="button" onClick={() => addEmail()}>Add</button>
+            <button type="button" >Add</button>
           </div>
 
           <div className="headers">

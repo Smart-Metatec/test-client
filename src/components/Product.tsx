@@ -21,7 +21,7 @@ const Product: React.FC<any> = ({product: p}) => {
 
   const getActiveUsesCallback = async () => {
     try {
-      const request = await axios.post(`api/${product.name.toLowerCase()}/websites?action=get`, {})
+      const request = await axios.post(`api/${product.name.toLowerCase()}/websites?action=get`)
       if(request.data.pass){
         setActivations(request.data.accounts.length)
       }
@@ -31,7 +31,6 @@ const Product: React.FC<any> = ({product: p}) => {
     
     
   }
-
   const getActiveUsers = useCallback(async () => await getActiveUsesCallback(), [])
 
   useEffect(() => {
