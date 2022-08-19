@@ -27,6 +27,8 @@ const Commerce = () => {
   const [websiteList, setWebsiteList] = useState<Form[]>([])
   const [error, setError] = useState("")
 
+  console.log("This is the commerce page")
+
 
   const addWebsite = async () => {
     if(!(websiteRef.current && protocolRef.current)) return

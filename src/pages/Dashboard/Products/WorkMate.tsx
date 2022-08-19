@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { IoMdArrowBack } from "react-icons/io"
 import { FaTimes } from "react-icons/fa"
 import { useNavigate } from "react-router"
-
+import axios from "../../../config/axios"
 import { WorkMatePage } from "../../../styled/Products/WorkMate.styled"
 
 interface Form {
@@ -10,41 +10,43 @@ interface Form {
   date: string
 }
 
+enum MailStatus {
+  default,
+  success,
+  fail,
+}
+
 const WorkMate = () => {
-  const emailRef = useRef<HTMLInputElement>(null)
-  const [emailList, setEmailList] = useState<Array<Form>>([])
+  const [mailState, setMailState] = useState<MailStatus>(MailStatus.default)
 
   const navigate = useNavigate()
+
+  const sendProductKey = async () => {
+    // Send the product key
+    const requestProductKey = await axios.post("api/mail/trustlock/productkey")
+    if(requestProductKey.status === 200) setMailState(MailStatus.success)
+    else setMailState(MailStatus.fail)
+
+  }
   return (
     <WorkMatePage>
         <header>
                 <IoMdArrowBack className="back" onClick={() => {navigate("../")}}/>
-                <h1>Manage Your WorkMate Account</h1>
+                <h1>Manage Your TrustLock Account</h1>
         </header>
         <main>
-
-          <div className="add">
-            <input type="text" ref={emailRef}/>
-            <button type="button" >Add</button>
-          </div>
-
-          <div className="headers">
-              <div>Email</div>
-              <div>Date Registered</div>
-              <div>Delete</div>
-          </div>
-
-          <div className="display">
-            {emailList && emailList.map(data => (
-              <div className="display-item" key={data.email}>
-
-                <div>{data.email}</div>
-                <div>{data.date}</div>
-                <div><FaTimes className="delete"/></div>
-
-              </div>
-            ))}
-          </div>
+          {
+            mailState === MailStatus.default 
+              ?
+                <button onClick={() => sendProductKey()}>Send Product Key</button>
+              : 
+            mailState === MailStatus.success
+              ? 
+                <h2>Please check your inbox for the product key</h2>
+              :
+                <h2>The was not sent please try again later or contact support</h2>
+          }
+          <a href="#">Request Migration</a>
 
         </main>
     </WorkMatePage>

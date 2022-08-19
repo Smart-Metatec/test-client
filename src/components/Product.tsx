@@ -11,15 +11,12 @@ const Product: React.FC<any> = ({product: p}) => {
   const [product, setProduct] = useState(p)
   const [activations, setActivations] = useState(1)
 
-
-
-  
-
   const downloadProduct = () => {
     window.location.assign(`https://api.smartmetatec.com/api/users/downloadproduct?id=${product.product_id}`)
   }
 
   const getActiveUsesCallback = async () => {
+    if(product.name !== "Commerce") return
     try {
       const request = await axios.post(`api/${product.name.toLowerCase()}/websites?action=get`)
       if(request.data.pass){
@@ -53,7 +50,7 @@ const Product: React.FC<any> = ({product: p}) => {
         <button className="download" type="button" onClick={() => downloadProduct()}>Download</button>
       </div>
       <div>
-        <button type="button" onClick={() => navigate(product.name.toLowerCase())}>Manage</button>
+        <button type="button" onClick={() => navigate(`/dashboard/products/${product.name.toLowerCase()}`)}>Manage</button>
       </div>
     </ProductComponent>
   )

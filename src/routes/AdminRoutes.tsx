@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Route, Navigate } from 'react-router'
 
 import Home from '../pages/Dashboard/Admin/Home'
@@ -9,21 +9,6 @@ import SupportTickets from "../pages/Dashboard/Admin/Tickets"
 import AdminProducts from "../pages/Dashboard/Admin/Products"
 import Users from '../pages/Dashboard/Admin/Users'
 import Admin from '../pages/Dashboard/Admin/Admin'
-
-const AdminRoutes = () => {
-  return (
-      <Route path="/admin" element={<Admin />} >
-          <Route path="" element={<Home />}/>
-          <Route path="users" element={<Users />}/>
-          <Route path="users/:id" element={<UserInfo />}/>
-          <Route path="tickets" element={<SupportTickets />}/>
-          <Route path="products" element={<AdminProducts />}/>
-          <Route path="products/:id" element={<ProductInfo />}/>
-          <Route path="products/edit/:id" element={<Product />}/>
-          <Route path="*" element={<Navigate to=""/>}/>
-      </Route>
-  )
-}
 
 export default (
   <Route path="/admin" element={<Admin />} >
@@ -37,5 +22,3 @@ export default (
     <Route path="*" element={<Navigate to=""/>}/>
   </Route>
 )
-
-// export default AdminRoutes

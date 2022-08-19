@@ -35,8 +35,9 @@ const App: React.FC = (): JSX.Element => {
 
               <Route path="admin-login" element={<AdminLogin/>}/>
               {AdminRoutes}
+              <Route path="notfound" element={<NotFound />}/>
+              <Route path="*" element={<Navigate to="notfound"/>}/>
 
-              <Route path="*" element={<NotFound />}/>
               
           </Routes>
     </div>
