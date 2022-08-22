@@ -6,7 +6,7 @@ export const ProductComponent = styled.div`
     padding: 1rem;
     border-bottom: 2px solid ${({theme}) => theme.colors.orange};
     div {
-        width: 150px;
+        min-width: 200px;
         text-align: center;
 
         button {

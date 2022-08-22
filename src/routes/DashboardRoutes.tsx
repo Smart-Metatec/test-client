@@ -18,7 +18,7 @@ export default (
         <Route path="products" >
             <Route path="" element={<Products />}/>
             <Route path="trustlock" element={<WorkMate/>}/>
-            <Route path="commerce" element={<Commerce/>}/>
+            <Route path="smartcommerce" element={<Commerce/>}/>
             <Route path="*" element={<Navigate to="/notfound"/>}/>
         </Route>
 

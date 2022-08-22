@@ -9,10 +9,27 @@ const Product: React.FC<any> = ({product: p}) => {
   const navigate = useNavigate()
 
   const [product, setProduct] = useState(p)
-  const [activations, setActivations] = useState(1)
+  const [activations, setActivations] = useState(0)
 
-  const downloadProduct = () => {
-    window.location.assign(`https://api.smartmetatec.com/api/users/downloadproduct?id=${product.product_id}`)
+  const downloadProduct = async () => {
+    // Set the response type from the server
+    axios.defaults.responseType = 'blob'
+    // make the request to download the file
+    const requestDownload = await axios.post(`api/downloads/product`, {id: product.product_id})
+
+    // create download url from the server response
+    const downloadUrl = window.URL.createObjectURL(new Blob([requestDownload.data]))
+
+    // Create link element and assign the download url and download attribute
+    const link = document.createElement('a')
+    link.href = downloadUrl
+    link.setAttribute('download', `${product.name}.zip`)
+
+    // Click the link to download the product
+    link.click()
+
+    // Revoke the download url to avoid memory leaks
+    window.URL.revokeObjectURL(downloadUrl)
   }
 
   const getActiveUsesCallback = async () => {
@@ -50,7 +67,7 @@ const Product: React.FC<any> = ({product: p}) => {
         <button className="download" type="button" onClick={() => downloadProduct()}>Download</button>
       </div>
       <div>
-        <button type="button" onClick={() => navigate(`/dashboard/products/${product.name.toLowerCase()}`)}>Manage</button>
+        <button type="button" onClick={() => navigate(`/dashboard/products/${product.name.toLowerCase().split(" ").join("")}`)}>Manage</button>
       </div>
     </ProductComponent>
   )

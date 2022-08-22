@@ -46,6 +46,7 @@ const WorkMate = () => {
               :
                 <h2>The was not sent please try again later or contact support</h2>
           }
+          {/* This will be a link to a form that needs to be filled in and sent to us */}
           <a href="#">Request Migration</a>
 
         </main>
