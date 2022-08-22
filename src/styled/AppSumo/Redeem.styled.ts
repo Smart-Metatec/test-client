@@ -41,6 +41,7 @@ export const RedeemPage = styled.main`
         h4 {
             color: ${({theme}) => theme.colors.green};
             font-size: 2em;
+            margin: 20px 0px;
         }
     }
 
@@ -54,7 +55,7 @@ export const RedeemPage = styled.main`
         border-radius: 10px;
         background-color: transparent;
 
-        div {
+        > div {
             width: 100%;
             margin: auto;
             padding: 1rem;
@@ -62,7 +63,6 @@ export const RedeemPage = styled.main`
             label {
                 width: 100%;
                 display: block;
-                margin-bottom: 5px;
                 color: white;
             }
 
@@ -77,6 +77,7 @@ export const RedeemPage = styled.main`
                 background-color: transparent;
                 outline: none;
                 color: white;
+                margin-top: 5px;
 
                 &:focus {
                     border: 1px solid ${({theme}) => theme.colors.lightBlue};
@@ -85,7 +86,7 @@ export const RedeemPage = styled.main`
 
             button {
                 background-color: ${({theme}) => theme.colors.green};
-                color: white;
+                color: black;
                 font-size: 1.1em;
                 padding: 0.5rem 4rem;
                 border-radius: 5px;
@@ -104,6 +105,17 @@ export const RedeemPage = styled.main`
                 &:active {
                     border: 2px solid ${({theme}) => theme.colors.orange};
                     background-color: transparent;
+                }
+            }
+
+            div {
+                display: flex;
+                position: relative;
+                .error {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    left: 25%;
                 }
             }
         }
@@ -148,11 +160,10 @@ export const RedeemPage = styled.main`
         font-size: 1.1em;
         padding: 5px;
         border-radius: 5px;
-        border: 1px solid red;
         margin: auto;
         background-color: transparent;
         outline: none;
-        color: white;
+        color: red;
 
         &:focus {
             border: 1px solid ${({theme}) => theme.colors.lightBlue};
