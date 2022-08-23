@@ -1,11 +1,12 @@
 import styled from "styled-components"
 
 export const RedeemPage = styled.main`
-    height: 100vh;
+    min-height: 100vh;
     margin: auto;
     font-size: 1.1em;
     font-family: sans-serif;
     background-image: url("../images/background.jpg");
+    background-color: ${({theme}) => theme.colors.darkBlue};
     padding-bottom: 1rem;
     box-sizing: border-box;
     color: black;
@@ -182,4 +183,54 @@ export const RedeemPage = styled.main`
             color: ${({theme}) => theme.colors.green};
         }
     }
+
+@media screen and (max-width: 1700px) {
+    form {
+        width: 50%;
+    }
+
+}
+@media screen and (max-width: 1100px) {
+    header {
+        img {
+            width: 200px;
+        }
+
+        #smt-logo {
+            width: 300px;
+        }
+    }
+
+    section {
+        width: 70%;
+    }
+    form {
+        width: 70%;
+    }
+
+}
+@media screen and (max-width: 800px) {
+    header {
+        img {
+            width: 100px;
+        }
+
+        #smt-logo {
+            width: 200px;
+        }
+
+        .separator {
+            font-size: 1.5em;
+        }
+    }
+    form {
+        width: 80%;
+        > div {
+            button {
+                width: 60%;
+            }
+        }
+    }
+
+}
 `

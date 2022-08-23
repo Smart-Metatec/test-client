@@ -41,6 +41,7 @@ export const UpgradePage = styled.div`
                     width: 100%;
                     outline: none;
                     padding: 5px;
+                    margin-top: 10px;
                 }
 
                 button {

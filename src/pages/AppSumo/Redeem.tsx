@@ -23,6 +23,13 @@ interface CodeInterface {
   message: string
 }
 
+interface SubmitData {
+  firstName: string,
+  lastName: string,
+  email: string,
+  codes: string[]
+}
+
 const RedeemSchema = yup.object().shape({
   firstname: yup.string().required("Please enter your first name."),
   lastname: yup.string().required("Please enter your last name."),
@@ -45,8 +52,8 @@ const Redeem = () => {
 
   // verify the data before submitting it
   const verify = async (values: RedeemForm) => {
-    
     const { code1, code2, code3 } = values
+    let codeArray: string[] = []
 
     // check if code 1 & 2 are the same
     const same12 = code2 && code1 === code2
@@ -58,12 +65,26 @@ const Redeem = () => {
     // Set the error if two or more codes are the same
     if(same12 || same13 || same23) return setCodeStatus({valid: false, message: "The codes cannot be the same"})
 
-    // validate codes
-    let validCode = await axios.post("api/verify/appsumoCode", {code1, code2, code3})
-    // console.log(validCode.data)
-    // let pass = validCode.data.pass
-    // setCodeStatus({valid: false, message: "The code is not valid"})
+    if(code1) codeArray.push(code1)
+    if(code2) codeArray.push(code2)
+    if(code3) codeArray.push(code3)
+    
+    try{
+      // validate codes
+      let validCode = await axios.post("api/verify/appsumoCode", codeArray)
 
+      if(validCode.status !== 200) return setCodeStatus({valid: false, message: "Something went wrong."})
+      
+      // everything is fine continue the process
+      submit({
+        firstName: values.firstname, 
+        lastName: values.lastname, 
+        email: values.email, 
+        codes: validCode.data.codes
+      })
+    } catch(e: any){
+        setCodeStatus({valid: false, message: e.response.data.message})
+    }
   }
 
   const initialValues = (): RedeemForm => {
@@ -79,29 +100,19 @@ const Redeem = () => {
     return initialData
   }
 
-  const submit = async () => {
-
-    // if(validData){
-    //   try {
-    //     const check = await axios.post("api/appsumo/redeem", payload)
-    //     const data = check.data
-    //     if(data.pass){
-    //       setSubmitSuccess(true)
-    //       setUser(data.user_id)
-    //     }
-    //   } catch (e: any){
-    //     if(e?.response?.status === 301){
-    //       navigate("../login")
-    //     }
-    //   }
-      
-    // }
+  const submit = async (data: SubmitData) => {
+    try {
+      const redeemRequest = await axios.post("api/appsumo/redeem", data)
+      if(redeemRequest.status === 200) setSubmitSuccess(true)
+    } 
+    catch (e: any) {
+      if(e.response.status === 301) navigate("../login")
+    }
 
   }
 
   const Resend = async () => {
     let req = await axios.post("api/mail/signUp", {userId: user})
-    console.log(req.data)
   }
 
   useEffect(() => {

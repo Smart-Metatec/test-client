@@ -14,6 +14,7 @@ export let theme = {
     orange: "#ff4400",
     lightBlue: "#0567e1",
     darkBlue: "#051456",
+    background_image_color: "#060c1a",
     opacity(color: string, opacity: string){
       let themeColor
       switch(color){

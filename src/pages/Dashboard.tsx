@@ -11,11 +11,6 @@ import { login } from '../store/user'
 import { setProducts } from "../store/products"
 import axios from '../config/axios'
 
-
-
-
-
-
 const Dashboard = () => {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
@@ -31,7 +26,7 @@ const Dashboard = () => {
   // user products
   const getUser = async () => {
     try {
-      const request = await axios.post("/api/users/account/get", null)
+      const request = await axios.post("api/users/account/get")
       const response = request.data
       // console.log("This is the response from the dashboard request", response)
       if(response){
@@ -68,12 +63,10 @@ const Dashboard = () => {
       <DashboardPage>
         <Header />
         <Main>
-
           <Nav />
           <DashboardNestedRoutes>
             <Outlet />
-          </DashboardNestedRoutes>
-          
+          </DashboardNestedRoutes>      
         </Main>
       </DashboardPage>
     )
