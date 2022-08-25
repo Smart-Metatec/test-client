@@ -15,13 +15,13 @@ export const UpgradePage = styled.div`
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        margin-top: 10rem;
+        margin-top: 7em;
         height: 30vh;
         form {
-            padding: 3rem;
+            padding: 2em;
             border-radius: 10px;
-            width: 30vw;
-            height: 100%;
+            width: 20em;
+            height: 12em;
             background-color: ${({theme}) => theme.colors.darkBlue};
             background-color: white;
             color: black;
@@ -48,7 +48,7 @@ export const UpgradePage = styled.div`
                     font-size: 1em;
                     background-color: ${({theme}) => theme.colors.lightBlue};
                     border: 2px solid transparent;
-                    margin: 2rem auto;
+                    margin: 2em auto;
                     padding: 5px 20px;
                     border-radius: 5px;
                     color: white;
@@ -75,10 +75,10 @@ export const UpgradePage = styled.div`
         .user-info {
             background-color: white;
             color: black;
-            padding: 3rem;
+            padding: 2em;
             border-radius: 10px;
-            width: 30vw;
-            height: 100%;
+            width: 20em;
+            height: 12em;
             display: flex;
             justify-content: space-around;
             
@@ -98,5 +98,45 @@ export const UpgradePage = styled.div`
 
         }
     }
+
+    .error {
+        color: red;
+        text-align: left;
+    }
+
+    @media screen and (max-width: 1300px) {
+        font-size: 1.25em;
+    }
+    @media screen and (max-width: 1050px) {
+        font-size: 1em;
+    }
+    @media screen and (max-width: 850px) {
+        main {
+            flex-direction: column;
+            height: 60vh;
+        }
+    }
+    @media screen and (max-width: 450px) {
+        header {
+            img {
+                width: 80vw;
+            }
+        }
+        main {
+            form {
+                width: 15em;
+                div {
+                    button {
+                        font-size: 0.75em;
+                        padding: 4px 10px;
+                    }
+                }
+            }
+            .user-info {
+                width: 15em;
+            }
+        }
+    }
+
 
 `

@@ -26,8 +26,10 @@ const Dashboard = () => {
   // user products
   const getUser = async () => {
     try {
+      console.log("trying to get user")
       const request = await axios.post("api/users/account/get")
       const response = request.data
+      console.log(request)
       // console.log("This is the response from the dashboard request", response)
       if(response){
         dispatch(setProducts(response.products))
@@ -54,7 +56,7 @@ const Dashboard = () => {
       }
 
     }
-    checkServer()
+    // checkServer()
     getUser()
     // console.log(`is the data loading? ${loading}`)
   }, [])

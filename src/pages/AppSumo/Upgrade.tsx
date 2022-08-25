@@ -52,14 +52,16 @@ const Upgrade = () => {
         if(code2 && code3 && code2 === code3) return setError({error: true, message: "Codes cannot be the same."})
         if(code1 && code3 && code1 === code3) return setError({error: true, message: "Codes cannot be the same."})
 
+        
+
         try {
+            
             const upgradeRequest = await axios.post("api/appsumo/upgrade", {codes: codeArray})
             if(upgradeRequest.status === 200) navigate("../../dashboard")
         } catch (e: any) {
             setError({error: true, message: e.response.data.message})
         }
     }
-
     const getAccount = useCallback(async () => {
         try {
             const request = await axios.post("api/users/account/get")
@@ -84,7 +86,8 @@ const Upgrade = () => {
         <main>
             <form>
                 <div>
-                    <label>Enter your AppSumo Codes</label>
+                    <label>Enter your AppSumo Codes </label>
+                    <div className="error">{error.message}</div>
                     <input type="text" ref={code1Ref}/>
                     <input type="text" ref={code2Ref}/>
                     <input type="text" ref={code3Ref}/>

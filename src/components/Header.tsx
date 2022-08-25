@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 // import axios from 'axios'
 
@@ -12,11 +11,11 @@ const Header = () => {
   const navigate = useNavigate()
   const logout = async () => {
     try{
-      const request: AxiosResponse<any, any> = await axios.post("/api/users/logout", {})
-      if(request.data.pass){
-        navigate("/login")
-      }
-    } catch (e){
+      console.log("Sending logout request")
+      const requestLogout: AxiosResponse<any, any> = await axios.post("api/users/logout", {})
+      if(requestLogout.status === 200) navigate("/login")
+
+    } catch (e: any){
       navigate("/login")
     }
   }
@@ -27,10 +26,10 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <a href="https://www.smartmetatec.com" target="_blank">Home</a>
+            <a href="https://www.smartmetatec.com" target="_blank" rel="noreferrer">Home</a>
           </li>
           <li>
-            <a href="https://www.smartmetatec.com/products" target="_blank">Our Products</a>
+            <a href="https://www.smartmetatec.com/products" target="_blank" rel="noreferrer">Our Products</a>
           </li>
         </ul>
         <button type='button' onClick={() => logout()}>Logout</button>

@@ -51,12 +51,12 @@ const Login = () => {
                     email: response.email,
                     }
                 ))
-            console.log(response)
+            // console.log(response)
             navigate("/dashboard")
             }
         } catch (e: any) {
-            console.log(e)
-            setError(e?.response?.data?.message)
+            // console.log(e)
+            setError(e.response.data.message)
         }
         
     }
